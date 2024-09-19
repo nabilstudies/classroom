@@ -37,7 +37,7 @@ my_bashrc: |
       Q=$RHT_OCP4_QUAY_USER
     else
       # Still set the variables, but in a way that newer OCP classes can use them 
-M=https://api.ocp4.example.com:6443:59
+      M=https://api.ocp4.example.com:6443
 
       WC=apps.ocp4.example.com
       NS=nexus.nexus-common.apps.ocp4.example.com
@@ -59,23 +59,23 @@ M=https://api.ocp4.example.com:6443:59
   alias podsw='oc get pods -o wide -n $1'
 
   # OpenShift functions
-  whohas() {
-    local role="$1"
-    if [[ -z "$role" ]]; then
-        echo "Usage: whohas <role>"
-        return 1
-    fi
+    whohas() {
+      local role="$1"
+      if [[ -z "$role" ]]; then
+         echo "Usage: whohas <role>"
+         return 1
+      fi
 
-    oc get clusterrolebindings -o json | jq -r ".items[] | select(.roleRef.name == \"$role\" and .subjects != null) | .subjects[] | \"\(.kind) \(.name)\"" || {
-        echo "Error: Could not find role $role."
-        return 1
+      oc get clusterrolebindings -o json | jq -r ".items[] | select(.roleRef.name == \"$role\" and .subjects != null) | .subjects[] | \"\(.kind) \(.name)\"" || {
+         echo "Error: Could not find role $role."
+         return 1
+           }
     }
-}
 
-  whomembers() {
-    local group="$1"
-    oc get group "$group" -o json | jq -r '.users[]'
-}
+    whomembers() {
+      local group="$1"
+      oc get group \"$group\" -o json | jq -r '.users[]'
+    }
 
   # ===============================
   # Git bash environment variables
