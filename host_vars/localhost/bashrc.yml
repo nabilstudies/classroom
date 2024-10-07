@@ -149,8 +149,8 @@ my_bashrc: |
   # Activate virtual environment
   alias va='source ./venv/bin/activate'
 
-  # pastebin
-  alias pastebin="curl -F 'sprunge=<-' http://sprunge.us"
+  # glab snippets
+  alias pastebin="glab snippet create -pv public $1"
 
   # ==========
   # functions

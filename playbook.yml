@@ -90,6 +90,13 @@
         #      ansible.builtin.file:
         #        path: ~/.ansible-navigator.yml
         #        state: absent
+        #
+
+    - name: Ensure glab rpm is downloaded
+      ansible.builtin.get_url:
+        url: https://gitlab.com/gitlab-org/cli/-/releases/v1.47.0/downloads/glab_1.47.0_linux_arm64.rpm
+        dest: /var/tmp/glab_1.47.0_linux_arm64.rpm
+        mode: 0644
 
     - name: Ensure resolution is obtained
       register: current_resolution
