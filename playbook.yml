@@ -21,6 +21,15 @@
       ansible.builtin.slurp:
         src: /etc/rht
 
+    - name: Ensure needed packages are installed
+      become: true
+      ansible.builtin.dnf:
+        name:
+          - sqlite
+          - "https://gitlab.com/gitlab-org/cli/-/releases/v1.47.0/downloads/glab_1.47.0_linux_amd64.rpm" 
+        state: installed
+        disable_gpg_check: true
+          
     - name: Ensure pip3 is installed with python 3.11
       register: pip3_output
       ansible.builtin.command: /usr/bin/python3 -m ensurepip
@@ -83,21 +92,6 @@
         hour: "17"
         job: ~/bin/upload_timings 
 
-#    - name: Remove ~/.ansible-navigator.yml
-#      when: > 
-        #'do374' in course_info['content'] | b64decode | join or
-        #'rh294' in course_info['content'] | b64decode | join
-        #      ansible.builtin.file:
-        #        path: ~/.ansible-navigator.yml
-        #        state: absent
-        #
-
-    - name: Ensure glab rpm is downloaded
-      ansible.builtin.get_url:
-        url: https://gitlab.com/gitlab-org/cli/-/releases/v1.47.0/downloads/glab_1.47.0_linux_arm64.rpm
-        dest: /var/tmp/glab_1.47.0_linux_arm64.rpm
-        mode: 0644
-
     - name: Ensure resolution is obtained
       register: current_resolution
       changed_when: false
@@ -107,18 +101,9 @@
       when: "'current 1920 x 1080' not in current_resolution['stdout']"
       ansible.builtin.command: xrandr --size 1920x1080
 
-    - name: Ensure firefox base directory exists
-      ansible.builtin.file:
-        state: directory
-        owner: student
-        group: student
-        mode: '0755'
-        path: ~/.mozilla/firefox
-
-    - name: Ensure Firefox profile is restored
-      ansible.builtin.unarchive:
-        src: firefox_profile.tar.xz
-        dest: ~/.mozilla/firefox
+    - name: Ensure firefox configuration tasks are included
+      ansible.builtin.include_tasks:
+        file: firefox.yml
 
     - name: Create an Alt + Tab alternative with Alt + q
       ansible.builtin.shell: gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>q']"
