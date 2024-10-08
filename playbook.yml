@@ -1,4 +1,4 @@
-- name: Setup editing environment
+- name: Setup classroom environment
   hosts: localhost
   become: false
   gather_facts: false
@@ -15,11 +15,6 @@
         that: "'x11' in login_type['stdout'] or 'wayland' in login_type['stdout']"
         fail_msg: |
           This playbook must be run from a console session at https://rol.redhat.com
-
-    - name: Determine course type
-      register: course_info
-      ansible.builtin.slurp:
-        src: /etc/rht
 
     - name: Ensure needed packages are installed
       become: true
@@ -110,7 +105,7 @@
 
   handlers:
 
-# community.general.dconf was considered but did not behave as expected
+    # community.general.dconf was considered but did not behave as expected
     - name: Ensure profile is loaded
       ansible.builtin.shell: dconf load /org/gnome/terminal/ < /var/tmp/terminal_profile
 

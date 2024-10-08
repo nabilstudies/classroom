@@ -149,12 +149,20 @@ my_bashrc: |
   # Activate virtual environment
   alias va='source ./venv/bin/activate'
 
-  # glab snippets
-  alias pastebin="glab snippet create -pv public $1"
-
   # ==========
   # functions
   # ==========
+
+  # pastebin / glab snippets
+  pastebin (){
+    local filename="$1"
+    if [[ -z  "$filename" ]]; then
+        echo "Usage: pastebin /path/to/file"
+        return 1
+    fi
+
+    glab snippet create -pv public --filename $filename --title $filename
+  }
 
   # make and change to directory
   mcd (){

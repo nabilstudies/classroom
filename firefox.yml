@@ -1,12 +1,12 @@
 - name: Check if Firefox is running
   register: firefox_pid
-  ignore_errors: yes
+  ignore_errors: true
   ansible.builtin.command: pgrep firefox
 
 - name: Kill Firefox if running
-  when: firefox_pid.stdout != ""
-  ignore_errors: yes
-  ansible.builtin.command: kill -9 "{{ firefox_pid.stdout_lines | join(' ') }}"
+  when: firefox_pid['stdout'] != ""
+  ignore_errors: true
+  ansible.builtin.command: kill -9 "{{ firefox_pid['stdout_lines'] | join(' ') }}"
 
 - name: Get the active Firefox profile from profiles.ini
   register: profiles_info
@@ -19,14 +19,35 @@
   ansible.builtin.set_fact:
     firefox_profile_dir: "{{ profiles_info['stdout_lines'][item | int - 1] | regex_replace('Path=', '') }}"
 
+- name: Set Firefox font size to 20
+  ansible.builtin.lineinfile:
+    path: "~/.mozilla/firefox/{{ firefox_profile_dir }}/prefs.js"
+    line: 'user_pref("font.size.variable.x-western", 20);'
+    create: true
+  become_user: "{{ ansible_user }}"
+
+- name: Check if OpenShift courses bookmarks folder exists
+  register: openshift_folder_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_bookmarks WHERE title = 'OpenShift courses'"
+
 - name: Add OpenShift courses bookmarks folder
+  when: openshift_folder_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_bookmarks (type, title, parent) 
     VALUES (2, 'OpenShift courses', 
     (SELECT id FROM moz_bookmarks WHERE title = 'toolbar'));"
 
+- name: Check if OpenShift course URLs exist
+  register: openshift_url_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_places WHERE url = 'https://console-openshift-console.apps.ocp4.example.com'"
+
 - name: Add OpenShift course URLs to bookmarks folder
+  when: openshift_url_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_places (url) VALUES ('https://console-openshift-console.apps.ocp4.example.com');
@@ -38,14 +59,28 @@
     VALUES (1, (SELECT id FROM moz_places WHERE url = 'https://console-openshift-console.apps.ocp4-mng.example.com'), 
     (SELECT id FROM moz_bookmarks WHERE title = 'OpenShift courses'), 1, 'OCP MNG Console');"
 
+- name: Check if Ansible courses bookmarks folder exists
+  register: ansible_folder_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_bookmarks WHERE title = 'Ansible courses'"
+
 - name: Add Ansible courses bookmarks folder
+  when: ansible_folder_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_bookmarks (type, title, parent) 
     VALUES (2, 'Ansible courses', 
     (SELECT id FROM moz_bookmarks WHERE title = 'toolbar'));"
 
+- name: Check if Ansible course URLs exist
+  register: ansible_url_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_places WHERE url = 'https://controller.lab.example.com'"
+
 - name: Add Ansible course URLs to bookmarks folder
+  when: ansible_url_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_places (url) VALUES ('https://controller.lab.example.com');
@@ -57,19 +92,32 @@
     VALUES (1, (SELECT id FROM moz_places WHERE url = 'https://hub.lab.example.com'), 
     (SELECT id FROM moz_bookmarks WHERE title = 'Ansible courses'), 1, 'Hub');"
 
+- name: Check if Satellite courses bookmarks folder exists
+  register: satellite_folder_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_bookmarks WHERE title = 'Satellite courses'"
+
 - name: Add Satellite courses bookmarks folder
+  when: satellite_folder_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_bookmarks (type, title, parent) 
     VALUES (2, 'Satellite courses', 
     (SELECT id FROM moz_bookmarks WHERE title = 'toolbar'));"
 
+- name: Check if Satellite course URLs exist
+  register: satellite_url_check
+  changed_when: false
+  failed_when: false
+  ansible.builtin.command: sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "SELECT * FROM moz_places WHERE url = 'https://satellite.lab.example.com'"
+
 - name: Add Satellite course URLs to bookmarks folder
+  when: satellite_url_check['stdout'] == ""
   ansible.builtin.command: |
     sqlite3 ~/.mozilla/firefox/{{ firefox_profile_dir }}/places.sqlite "
     INSERT INTO moz_places (url) VALUES ('https://satellite.lab.example.com');
     INSERT INTO moz_bookmarks (type, fk, parent, position, title) 
     VALUES (1, (SELECT id FROM moz_places WHERE url = 'https://satellite.lab.example.com'), 
     (SELECT id FROM moz_bookmarks WHERE title = 'Satellite courses'), 0, 'Satellite');"
-
 
