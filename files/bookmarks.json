@@ -56,19 +56,19 @@
         }
       ],
       "guid": "toolbar_____",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     },
     "other": {
       "children": [],
       "guid": "unfiled_____",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     },
     "menu": {
       "children": [],
       "guid": "menu________",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     },
     "mobile": {
@@ -80,19 +80,19 @@
     "places": {
       "children": [],
       "guid": "places______",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     },
     "tags": {
       "children": [],
       "guid": "tags________",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     },
     "toolbar": {
       "children": [],
       "guid": "toolbar_____",
-      "title": "",  // Changed to an empty string
+      "title": "",  // Changed to an empty string,
       "type": "text/x-moz-place-container"  // Changed type
     }
   },
