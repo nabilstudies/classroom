@@ -102,6 +102,7 @@
 
     - name: Create an Alt + Tab alternative with Alt + q
       ansible.builtin.shell: gsettings set org.gnome.desktop.wm.keybindings switch-windows "['<Alt>q']"
+      changed_when: false
 
   handlers:
 
