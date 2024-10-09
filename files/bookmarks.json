@@ -1,5 +1,5 @@
 {
-  "checksum": "aaabbbcccddd", 
+  "checksum": "aaabbbcccddd",
   "roots": {
     "bookmark_bar": {
       "children": [
@@ -56,44 +56,44 @@
         }
       ],
       "guid": "toolbar_____",
-      "title": "Bookmarks Toolbar",
-      "type": "folder"
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
+    },
+    "other": {
+      "children": [],
+      "guid": "unfiled_____",
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
     },
     "menu": {
       "children": [],
       "guid": "menu________",
-      "title": "Menu",
-      "type": "folder"
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
     },
     "mobile": {
       "children": [],
       "guid": "mobile______",
       "title": "Mobile Bookmarks",
-      "type": "folder"
-    },
-    "other": {
-      "children": [],
-      "guid": "unfiled_____",
-      "title": "Other Bookmarks",
-      "type": "folder"
+      "type": "text/x-moz-place-container"  // Changed type
     },
     "places": {
       "children": [],
       "guid": "places______",
-      "title": "",
-      "type": "folder"
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
     },
     "tags": {
       "children": [],
       "guid": "tags________",
-      "title": "Tags",
-      "type": "folder"
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
     },
     "toolbar": {
       "children": [],
       "guid": "toolbar_____",
-      "title": "Bookmarks Toolbar",
-      "type": "folder"
+      "title": "",  // Changed to an empty string
+      "type": "text/x-moz-place-container"  // Changed type
     }
   },
   "version": 1
