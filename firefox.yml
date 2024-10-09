@@ -26,7 +26,6 @@
     path: "~/.mozilla/firefox/{{ firefox_profile_dir }}/prefs.js"
     line: 'user_pref("font.size.variable.x-western", 20);'
     create: true
-  become_user: "{{ ansible_user }}"
 
 - name: Check if OpenShift courses bookmarks folder exists
   register: openshift_folder_check
