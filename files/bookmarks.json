@@ -1,55 +1,100 @@
 {
-"guid": "root________",
-"title": "",
-"id": 1,
-"index": 0,
-"dateAdded": 0,
-"lastModified": 0,
-"type": "text/x-moz-place-container",
-"root": "placesRoot",
-"children": [
-{
-"guid": "menu________",
-"title": "Bookmarks Menu",
-"id": 2,
-"index": 0,
-"dateAdded": 0,
-"lastModified": 0,
-"type": "text/x-moz-place-container",
-"root": "bookmarksMenuFolder",
-"children": [
-  {
-    "guid": "OCPOpenShift",
-    "title": "OpenShift courses",
-    "id": 3,
-    "index": 0,
-    "dateAdded": 0,
-    "lastModified": 0,
-    "type": "text/x-moz-place-container",
-    "children": [
-      {
-	"guid": "OCPConsole",
-	"title": "OCP Console",
-	"uri": "https://console-openshift-console.apps.ocp4.example.com",
-	"id": 4,
-	"index": 0,
-	"dateAdded": 0,
-	"lastModified": 0,
-	"type": "text/x-moz-place"
-      },
-      {
-	"guid": "OCPMNGConsole",
-	"title": "OCP MNG Console",
-	"uri": "https://console-openshift-console.apps.ocp4-mng.example.com",
-	"id": 5,
-	"index": 1,
-	"dateAdded": 0,
-	"lastModified": 0,
-	"type": "text/x-moz-place"
-      }
-    ]
-  }
-]
-}
-]
+  "checksum": "aaabbbcccddd", 
+  "roots": {
+    "bookmark_bar": {
+      "children": [
+        {
+          "guid": "folder1",
+          "title": "OpenShift courses",
+          "type": "folder",
+          "children": [
+            {
+              "guid": "bookmark1",
+              "title": "OCP Console",
+              "type": "bookmark",
+              "url": "https://console-openshift-console.apps.ocp4.example.com"
+            },
+            {
+              "guid": "bookmark2",
+              "title": "OCP MNG Console",
+              "type": "bookmark",
+              "url": "https://console-openshift-console.apps.ocp4-mng.example.com"
+            }
+          ]
+        },
+        {
+          "guid": "folder2",
+          "title": "Ansible courses",
+          "type": "folder",
+          "children": [
+            {
+              "guid": "bookmark3",
+              "title": "Controller",
+              "type": "bookmark",
+              "url": "https://controller.lab.example.com"
+            },
+            {
+              "guid": "bookmark4",
+              "title": "Hub",
+              "type": "bookmark",
+              "url": "https://hub.lab.example.com"
+            }
+          ]
+        },
+        {
+          "guid": "folder3",
+          "title": "Satellite courses",
+          "type": "folder",
+          "children": [
+            {
+              "guid": "bookmark5",
+              "title": "Satellite",
+              "type": "bookmark",
+              "url": "https://satellite.lab.example.com"
+            }
+          ]
+        }
+      ],
+      "guid": "toolbar_____",
+      "title": "Bookmarks Toolbar",
+      "type": "folder"
+    },
+    "menu": {
+      "children": [],
+      "guid": "menu________",
+      "title": "Menu",
+      "type": "folder"
+    },
+    "mobile": {
+      "children": [],
+      "guid": "mobile______",
+      "title": "Mobile Bookmarks",
+      "type": "folder"
+    },
+    "other": {
+      "children": [],
+      "guid": "unfiled_____",
+      "title": "Other Bookmarks",
+      "type": "folder"
+    },
+    "places": {
+      "children": [],
+      "guid": "places______",
+      "title": "",
+      "type": "folder"
+    },
+    "tags": {
+      "children": [],
+      "guid": "tags________",
+      "title": "Tags",
+      "type": "folder"
+    },
+    "toolbar": {
+      "children": [],
+      "guid": "toolbar_____",
+      "title": "Bookmarks Toolbar",
+      "type": "folder"
+    }
+  },
+  "version": 1
 }
