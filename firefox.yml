@@ -5,7 +5,7 @@
 
 - name: Wait for 5 seconds
   ansible.builtin.pause:
-    seconds: 5
+    seconds: 20
 
 - name: Terminate Firefox
   ansible.builtin.shell: "pkill firefox"
