@@ -1,12 +1,14 @@
-- name: Check if Firefox is running
-  register: firefox_pid
-  ignore_errors: true
-  ansible.builtin.command: pgrep firefox
+- name: Start Firefox in the background
+  async: 1
+  poll: 0
+  ansible.builtin.shell: "firefox &"
 
-- name: Kill Firefox if running
-  when: firefox_pid['stdout'] != ""
-  ignore_errors: true
-  ansible.builtin.command: kill -9 "{{ firefox_pid['stdout_lines'] | join(' ') }}"
+- name: Wait for 5 seconds
+  ansible.builtin.pause:
+    seconds: 5
+
+- name: Terminate Firefox
+  ansible.builtin.shell: "pkill firefox"
 
 - name: Get the active Firefox profile from profiles.ini
   register: profiles_info
