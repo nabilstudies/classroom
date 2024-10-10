@@ -41,3 +41,9 @@
     path: "~/.mozilla/firefox/{{ firefox_profile_dir }}/prefs.js"
     line: 'user_pref("font.size.variable.x-western", 20);'
     create: true
+
+- name: Ensure Bookmarks Toolbar is always visible
+  ansible.builtin.lineinfile:
+    path: "~/.mozilla/firefox/{{ firefox_profile_dir }}/prefs.js"
+    line: 'user_pref("toolbar.toolbars.bookmarks.visibility", "visible");'
+    create: true
