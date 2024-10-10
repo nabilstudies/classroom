@@ -3,9 +3,9 @@
   poll: 0
   ansible.builtin.shell: "firefox &"
 
-- name: Wait for 30 seconds  # Increased wait time
+- name: Wait for 15 seconds
   ansible.builtin.pause:
-    seconds: 30
+    seconds: 15
 
 - name: Ensure Firefox is terminated
   register: firefox_status
